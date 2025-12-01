@@ -27,7 +27,7 @@ int calculate(char *fichier)
         }
         else
         {
-            while (value < 0)
+            while (value > 0)
             {
                 value--;
                 dial++;
