@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
 
 int taille_nombre(long long int nombre)
 {
@@ -21,17 +22,31 @@ int est_diviseur(int a, int b)
     return 0;
 }
 
-int nombre_diviseur(int taille)
+int is_invalid(long long int nb)
 {
-    int nb_div = 0;
-    for (int i = 1; i <= taille; i++)
+    for (int i = 2; i < taille_nombre(nb); i++)
     {
-        if (est_diviseur(i, taille))
+        if (est_diviseur(i, taille_nombre(nb)))
         {
-            nb_div++;
+            long long int *split = malloc(i * (sizeof(long long int)));
+            for (int j = 0; j < i; j++)
+            {
+                long long int part = nb / pow(10, (taille_nombre(nb) / i) * (i - j - 1));
+                split[j] = part;
+                nb -= part * pow(10, (taille_nombre(nb) / i) * (i - j - 1));
+            }
+            for (int j = 0; j < i - 1; j++)
+            {
+                if (split[j] != split[j+1])
+                {
+                    return 0;
+                }
+            }
+            free(split);
+            return 1;
         }
     }
-    return nb_div;
+    return 0;
 }
 
 long long int add_invalid(char *fichier)
@@ -44,9 +59,8 @@ long long int add_invalid(char *fichier)
     {
         for (long long int i = start; i <= stop; i++)
         {
-            long long int part1 = i / pow(10, taille_nombre(i) / 2);
-            long long int part2 = i - part1 * pow(10, taille_nombre(i) / 2);
-            if (part1 == part2)
+
+            if (is_invalid(i))
             {
                 password += i;
             }
