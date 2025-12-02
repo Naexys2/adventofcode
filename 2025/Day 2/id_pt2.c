@@ -41,15 +41,21 @@ int is_invalid(long long int nb)
                 split[j] = part;
                 nb_copie -= part * pow(10, (t_nb / i) * (i - j - 1));
             }
-            for (int j = 0; j < i - 1; j++)
+            printf("part 0/%d, %lld\n", i, split[0]);
+            int is_ok = 1;
+            for (int j = 1; j < i; j++)
             {
-                if (split[j] != split[j+1])
+                printf("part %d/%d, %lld\n", j + 1, i, split[j]);
+                if (split[j] != split[0])
                 {
-                    return 0;
+                    is_ok = 0;
                 }
             }
             free(split);
-            return 1;
+            if (is_ok)
+            {
+                return 1;
+            }
         }
     }
     return 0;
@@ -80,5 +86,6 @@ int main()
 {
     long long int password = add_invalid("input.txt");
     printf("Solution : %lld\n", password);
+    // printf("%d\n", is_invalid(121212));
     return 0;
 }
