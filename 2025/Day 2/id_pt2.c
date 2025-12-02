@@ -41,11 +41,11 @@ int is_invalid(long long int nb)
                 split[j] = part;
                 nb_copie -= part * pow(10, (t_nb / i) * (i - j - 1));
             }
-            printf("part 0/%d, %lld\n", i, split[0]);
+            // printf("part 0/%d, %lld\n", i, split[0]);
             int is_ok = 1;
             for (int j = 1; j < i; j++)
             {
-                printf("part %d/%d, %lld\n", j + 1, i, split[j]);
+                // printf("part %d/%d, %lld\n", j + 1, i, split[j]);
                 if (split[j] != split[0])
                 {
                     is_ok = 0;
