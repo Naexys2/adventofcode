@@ -24,16 +24,17 @@ int est_diviseur(int a, int b)
 
 int is_invalid(long long int nb)
 {
-    for (int i = 2; i < taille_nombre(nb); i++)
+    int t_nb = taille_nombre(nb);
+    for (int i = 2; i <= t_nb; i++)
     {
-        if (est_diviseur(i, taille_nombre(nb)))
+        if (est_diviseur(i, t_nb))
         {
             long long int *split = malloc(i * (sizeof(long long int)));
             for (int j = 0; j < i; j++)
             {
-                long long int part = nb / pow(10, (taille_nombre(nb) / i) * (i - j - 1));
+                long long int part = nb / pow(10, (t_nb / i) * (i - j - 1));
                 split[j] = part;
-                nb -= part * pow(10, (taille_nombre(nb) / i) * (i - j - 1));
+                nb -= part * pow(10, (t_nb / i) * (i - j - 1));
             }
             for (int j = 0; j < i - 1; j++)
             {
