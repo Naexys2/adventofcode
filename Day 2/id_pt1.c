@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int taille_nombre(int nombre)
+int taille_nombre(long long int nombre)
 {
     int taille = 0;
     while (nombre > 1)
@@ -12,23 +12,24 @@ int taille_nombre(int nombre)
     return taille;
 }
 
-int add_invalid(char *fichier)
+long long int add_invalid(char *fichier)
 {
-    int password = 0;
+    long long int password = 0;
     FILE *input = fopen(fichier, "r");
-    int start;
-    int stop;
-    while (fscanf(input, "%d-%d,", &start, &stop) != EOF)
+    long long int start;
+    long long int stop;
+    while (fscanf(input, "%lld-%lld,", &start, &stop) != EOF)
     {
-        for (int i = start; i <= stop; i++)
+        printf("\ninterval : %lld | %lld\n", start, stop);
+        for (long long int i = start; i <= stop; i++)
         {
             if (taille_nombre(i) % 2 == 0)
             {
-                int part1 = i / pow(10, taille_nombre(i) / 2);
-                int part2 = i - part1 * pow(10, taille_nombre(i) / 2);
+                long long int part1 = i / pow(10, taille_nombre(i) / 2);
+                long long int part2 = i - part1 * pow(10, taille_nombre(i) / 2);
                 if (part1 == part2)
                 {
-                    printf("%d | %d\n", part1, part2);
+                    // printf("%d | %d\n", part1, part2);
                     password += i;
                 }
             }
@@ -40,7 +41,7 @@ int add_invalid(char *fichier)
 
 int main()
 {
-    int password = add_invalid("input.txt");
-    printf("Solution : %d\n", password);
+    long long int password = add_invalid("input.txt");
+    printf("Solution : %lld\n", password);
     return 0;
 }
