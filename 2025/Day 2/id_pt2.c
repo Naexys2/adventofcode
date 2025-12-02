@@ -25,16 +25,21 @@ int est_diviseur(int a, int b)
 int is_invalid(long long int nb)
 {
     int t_nb = taille_nombre(nb);
+    if (t_nb < 2)
+    {
+        return 0;
+    }
     for (int i = 2; i <= t_nb; i++)
     {
         if (est_diviseur(i, t_nb))
         {
+            long long int nb_copie = nb;
             long long int *split = malloc(i * (sizeof(long long int)));
             for (int j = 0; j < i; j++)
             {
-                long long int part = nb / pow(10, (t_nb / i) * (i - j - 1));
+                long long int part = nb_copie / pow(10, (t_nb / i) * (i - j - 1));
                 split[j] = part;
-                nb -= part * pow(10, (t_nb / i) * (i - j - 1));
+                nb_copie -= part * pow(10, (t_nb / i) * (i - j - 1));
             }
             for (int j = 0; j < i - 1; j++)
             {
