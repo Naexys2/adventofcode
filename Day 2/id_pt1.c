@@ -4,7 +4,7 @@
 int taille_nombre(long long int nombre)
 {
     int taille = 0;
-    while (nombre > 1)
+    while (nombre >= 1)
     {
         nombre = nombre / 10;
         taille++;
